@@ -1,0 +1,11 @@
+http://voyage.services/voyage/3/
+retourne le xml d'un voyage
+http://voyage.services/voyage/liste/
+retourne le xml de la liste des voyages
+http://voyage.services/vaisseau/4/
+retourne le xml de un vaisseau + ses voyages
+http://voyage.services/vaisseau/liste/
+retourne le xml de la liste des vaisseaux
+
+http://voyage.services/voyage/3/ajouter
+http://voyage.services/vaisseau/3/ajouter
