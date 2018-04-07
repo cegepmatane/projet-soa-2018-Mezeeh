@@ -1,8 +1,8 @@
 <?php
-  include_once "baseDeDonner.php";
+  include_once "baseDeDonnees.php";
   class ServiceDao
   {
-    function lireVaisseau()
+    function lireVaisseaux()
     {
       global $basededonnees;
       $requete = $basededonnees->prepare("SELECT * FROM vaisseau");
@@ -11,7 +11,7 @@
 
       return $vaisseau;
     }
-    function lireVoyage()
+    function lireVoyages()
     {
       global $basededonnees;
       $requete = $basededonnees->prepare("SELECT * FROM voyage");

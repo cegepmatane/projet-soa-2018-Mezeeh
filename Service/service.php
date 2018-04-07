@@ -1,8 +1,8 @@
 <?php
   include "ServiceDao.php";
   $serviceDao = new ServiceDao();
-  $listeVaisseaux = $serviceDao->lireVaisseau();
-  $listeVoyages = $serviceDao->lireVoyage();
+  $listeVaisseaux = $serviceDao->lireVaisseaux();
+  $listeVoyages = $serviceDao->lireVoyages();
   //print_r($listeVaisseaux);
 
   header("Content-type: text/xml");
