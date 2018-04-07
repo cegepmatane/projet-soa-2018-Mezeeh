@@ -26,13 +26,13 @@
   <voyages>
       <?php
           foreach($listeVoyages as $voyages){?>
-              <vaisseau>
+              <voyage>
                   <id><?=$voyages['id']?></id>
                   <nom><?=$voyages['nom']?></nom>
                   <description><?=$voyages['destination']?></description>
                   <capaciter><?=$voyages['description']?></capaciter>
                   <porter><?=$voyages['distance']?></porter>
-              </vaisseau>
+              </voyage>
               <?php
           }
       ?>
