@@ -1,4 +1,4 @@
-package modele;
+package ca.qc.cgmatane.informatique.modele;
 
 public class Vaisseau {
     protected int id,

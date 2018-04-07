@@ -1,8 +1,9 @@
-package vue;
+package ca.qc.cgmatane.informatique.vue;
 
-import action.Controleur;
+import ca.qc.cgmatane.informatique.action.Controleur;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
@@ -22,5 +23,9 @@ public class VaisseauVue extends Application{
         scenePrincipal.setTitle(nomFenetre);
         scenePrincipal.show();
         controleur = new Controleur(this);
+    }
+
+    public void afficherVaisseaux(String informationsVaisseaux) {
+        racine.getChildren().add(new Text(informationsVaisseaux));
     }
 }
