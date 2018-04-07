@@ -13,9 +13,9 @@
           foreach($listeVaisseaux as $vaisseau){?>
               <vaisseau>
                   <id><?=$vaisseau['id']?></id>
-                  <nom><?=$vaisseau['nom']?></nom>
-                  <description><?=$vaisseau['description']?></description>
-                  <capaciter><?=$vaisseau['capaciter']?></capaciter>
+                  <nom><?=utf8_encode($vaisseau['nom'])?></nom>
+                  <description><?=utf8_encode($vaisseau['description'])?></description>
+                  <capaciter><?=utf8_encode($vaisseau['capaciter'])?></capaciter>
                   <porter><?=$vaisseau['porter']?></porter>
               </vaisseau>
               <?php
@@ -27,9 +27,9 @@
           foreach($listeVoyages as $voyages){?>
               <voyage>
                   <id><?=$voyages['id']?></id>
-                  <nom><?=$voyages['nom']?></nom>
-                  <description><?=$voyages['destination']?></description>
-                  <capaciter><?=$voyages['description']?></capaciter>
+                  <nom><?=utf8_encode($voyages['nom'])?></nom>
+                  <description><?=utf8_encode($voyages['destination'])?></description>
+                  <capaciter><?=utf8_encode($voyages['description'])?></capaciter>
                   <porter><?=$voyages['distance']?></porter>
               </voyage>
               <?php
