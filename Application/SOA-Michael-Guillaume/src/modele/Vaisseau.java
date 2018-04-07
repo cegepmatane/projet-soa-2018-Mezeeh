@@ -8,12 +8,12 @@ public class Vaisseau {
     protected String nom,
                     description;
 
-    public Vaisseau(int id, int capaciter, int porter, String nom, String description) {
+    public Vaisseau(int id, String nom, String description, int capaciter, int porter) {
         this.id = id;
-        this.capaciter = capaciter;
-        this.porter = porter;
         this.nom = nom;
         this.description = description;
+        this.capaciter = capaciter;
+        this.porter = porter;
     }
 
     public int getId() {
