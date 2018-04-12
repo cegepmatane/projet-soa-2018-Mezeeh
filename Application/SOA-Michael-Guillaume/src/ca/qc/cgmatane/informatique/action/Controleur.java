@@ -16,11 +16,11 @@ public class Controleur {
         serviceDAO = new ServiceDAO();
         List<Vaisseau> listeVaisseaux = serviceDAO.listerVaisseaux();
 
-        String informationsVaisseaux = "";
+        /*String informationsVaisseaux = "";
         for(Vaisseau v : listeVaisseaux){
             informationsVaisseaux += v.getNom() + " | " + v.getDescription() + " | " + v.getCapaciter() + " personnes | " + v.getPorter() + " km\n";
-        }
+        }*/
 
-        vue.afficherVaisseaux(informationsVaisseaux);
+        vue.afficherVaisseaux(listeVaisseaux);
     }
 }
