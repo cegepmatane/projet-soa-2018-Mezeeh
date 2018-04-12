@@ -1,4 +1,6 @@
-import vue.VaisseauVue;
+package ca.qc.cgmatane.informatique;
+
+import ca.qc.cgmatane.informatique.vue.VaisseauVue;
 
 public class App {
     public static void main(String[] args) {
