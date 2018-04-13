@@ -4,6 +4,7 @@ import ca.qc.cgmatane.informatique.dao.ServiceDAO;
 import ca.qc.cgmatane.informatique.modele.Vaisseau;
 import ca.qc.cgmatane.informatique.vue.VaisseauVue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controleur {
@@ -16,11 +17,18 @@ public class Controleur {
         serviceDAO = new ServiceDAO();
         List<Vaisseau> listeVaisseaux = serviceDAO.listerVaisseaux();
 
-        /*String informationsVaisseaux = "";
-        for(Vaisseau v : listeVaisseaux){
-            informationsVaisseaux += v.getNom() + " | " + v.getDescription() + " | " + v.getCapaciter() + " personnes | " + v.getPorter() + " km\n";
-        }*/
-
         vue.afficherVaisseaux(listeVaisseaux);
+    }
+
+    public void chargerInformationsVaisseau(Vaisseau vaisseau){
+        List<String> informations = new ArrayList<String>();
+
+        informations.add("ID : "  + vaisseau.getId());
+        informations.add("Nom : "  + vaisseau.getNom());
+        informations.add("Description : "  + vaisseau.getDescription());
+        informations.add("Capacité : "  + vaisseau.getCapaciter() + " personne(s)");
+        informations.add("Porter : "  + vaisseau.getPorter() + " km");
+
+        vue.afficherInformationsVaisseau(informations);
     }
 }

@@ -38,10 +38,18 @@ public class VaisseauVue extends Application{
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
-                    System.out.println(vaisseau.getDescription());
+                    controleur.chargerInformationsVaisseau(vaisseau);
                 }
             });
             racine.getChildren().add(button);
+        }
+    }
+
+    public void afficherInformationsVaisseau(List<String> informations){
+        racine.getChildren().clear();
+
+        for(String info : informations){
+            racine.getChildren().add(new Text(info));
         }
     }
 }
