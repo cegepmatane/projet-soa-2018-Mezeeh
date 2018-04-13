@@ -7,18 +7,32 @@
       global $basededonnees;
       $requete = $basededonnees->prepare("SELECT * FROM vaisseau");
       $requete->execute();
-      $vaisseau = $requete->fetchAll();
+      $vaisseaux = $requete->fetchAll();
 
-      return $vaisseau;
+      return $vaisseaux;
     }
     function lireVoyages()
     {
       global $basededonnees;
       $requete = $basededonnees->prepare("SELECT * FROM voyage");
       $requete->execute();
-      $voyage = $requete->fetchAll();
+      $voyages = $requete->fetchAll();
 
-      return $voyage;
+      return $voyages;
+    }
+    function lireVoyage()
+    {
+
+    }
+    function lireVaisseau($id)
+    {
+      global $basededonnees;
+      $requete = $basededonnees->prepare("SELECT * FROM vaisseau WHERE id = :id");
+      $requete->bindParam(':id', $id, PDO::PARAM_INT);
+      $requete->execute();
+      $vaisseau = $requete->fetch();
+
+      return $vaisseau;
     }
   }
 ?>
