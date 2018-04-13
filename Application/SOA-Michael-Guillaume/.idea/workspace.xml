@@ -58,7 +58,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/App.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
@@ -121,15 +121,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VaisseauVue.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="VaisseauVue.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/vue/VaisseauVue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="43" column="45" lean-forward="true" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
+            <state relative-caret-position="500">
+              <caret line="51" column="53" lean-forward="true" selection-start-line="51" selection-start-column="53" selection-end-line="51" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1338#1339#0" expanded="true" />
-                <element signature="e#1423#1424#0" expanded="true" />
+                <element signature="e#1426#1427#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -138,10 +138,11 @@
       <file leaf-file-name="Controleur.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/action/Controleur.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="22" />
+            <state relative-caret-position="493">
+              <caret line="29" column="67" lean-forward="false" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#691#699#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -177,8 +178,8 @@
         <option value="$PROJECT_DIR$/src/cgmatane/informatique/App.java" />
         <option value="$PROJECT_DIR$/src/informatique/App.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/App.java" />
-        <option value="$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/action/Controleur.java" />
         <option value="$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/vue/VaisseauVue.java" />
+        <option value="$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/action/Controleur.java" />
       </list>
     </option>
   </component>
@@ -462,12 +463,12 @@
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1523064947246" duration="6293000" />
-      <workItem from="1523576846731" duration="688000" />
+      <workItem from="1523576846731" duration="2123000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8283000" />
+    <option name="totallyTimeSpent" value="9718000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -588,7 +589,7 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1338#1339#0" expanded="true" />
-            <element signature="e#1423#1424#0" expanded="true" />
+            <element signature="e#1426#1427#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -599,6 +600,7 @@
           <caret line="23" column="53" lean-forward="false" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#691#699#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -656,33 +658,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/App.java">
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/vue/VaisseauVue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="500">
+          <caret line="51" column="53" lean-forward="true" selection-start-line="51" selection-start-column="53" selection-end-line="51" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1338#1339#0" expanded="true" />
+            <element signature="e#1426#1427#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/action/Controleur.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="22" />
+        <state relative-caret-position="493">
+          <caret line="29" column="67" lean-forward="false" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="67" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#691#699#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/vue/VaisseauVue.java">
+    <entry file="file://$PROJECT_DIR$/src/ca/qc/cgmatane/informatique/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="43" column="45" lean-forward="true" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1338#1339#0" expanded="true" />
-            <element signature="e#1423#1424#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="68">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
