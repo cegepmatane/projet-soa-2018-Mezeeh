@@ -65,7 +65,6 @@ public class ServiceDAO {
         } catch (SAXException e) {
             e.printStackTrace();
         }
-        System.out.println(this.recupererVoyage(1).getDestination());
         return listeVaisseaux;
     }
     public List<Voyage> listerVoyages(){
