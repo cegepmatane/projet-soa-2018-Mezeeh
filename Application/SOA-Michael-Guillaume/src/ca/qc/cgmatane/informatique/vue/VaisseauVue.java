@@ -7,9 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -21,13 +22,33 @@ public class VaisseauVue extends Application{
     protected int largeurFenetre = 600,
             hauteurFenetre = 400;
 
-    protected VBox racine;
+    protected VBox contenuOngletVaisseaux,
+                    contenuOngletVoyages;
+
+    protected TabPane onglets;
+    protected Tab ongletVaisseaux,
+            ongletVoyages;
 
     @Override
     public void start(Stage scenePrincipal) throws Exception {
-        racine = new VBox();
-        scenePrincipal.setScene(new Scene(racine,largeurFenetre, hauteurFenetre));
+        onglets = new TabPane();
+
+        scenePrincipal.setScene(new Scene(onglets,largeurFenetre, hauteurFenetre));
         scenePrincipal.setTitle(nomFenetre);
+
+        ongletVaisseaux = new Tab("Vaisseaux");
+        ongletVaisseaux.setClosable(false);
+        contenuOngletVaisseaux = new VBox();
+        ongletVaisseaux.setContent(contenuOngletVaisseaux);
+
+        ongletVoyages = new Tab("Voyages");
+        ongletVoyages.setClosable(false);
+        contenuOngletVoyages = new VBox();
+        ongletVoyages.setContent(contenuOngletVoyages);
+
+        onglets.getTabs().add(ongletVaisseaux);
+        onglets.getTabs().add(ongletVoyages);
+
         scenePrincipal.show();
         controleur = new Controleur(this);
     }
@@ -41,15 +62,15 @@ public class VaisseauVue extends Application{
                     controleur.chargerInformationsVaisseau(vaisseau);
                 }
             });
-            racine.getChildren().add(button);
+            contenuOngletVaisseaux.getChildren().add(button);
         }
     }
 
     public void afficherInformationsVaisseau(List<String> informations){
-        racine.getChildren().clear();
+        contenuOngletVaisseaux.getChildren().clear();
 
         for(String info : informations){
-            racine.getChildren().add(new Text(info));
+            contenuOngletVaisseaux.getChildren().add(new Text(info));
         }
     }
 }
