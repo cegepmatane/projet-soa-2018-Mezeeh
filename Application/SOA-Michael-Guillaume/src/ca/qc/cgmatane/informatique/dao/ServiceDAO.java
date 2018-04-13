@@ -65,6 +65,7 @@ public class ServiceDAO {
         } catch (SAXException e) {
             e.printStackTrace();
         }
+        System.out.println(this.recupererVoyage(1).getDestination());
         return listeVaisseaux;
     }
     public List<Voyage> listerVoyages(){
@@ -127,6 +128,35 @@ public class ServiceDAO {
          }
     	 
     	return vaisseau;
+    }
+    public Voyage recupererVoyage(int id)
+    {
+    	Voyage voyage = null;
+    	String xml = this.recupererXML("http://localhost/Service/voyage/voyage.php?id="+id, "</voyage>");
+    	if(null == xml) return null;
+    	 try {
+             DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+             Document document = parseur.parse(new StringBufferInputStream(xml));
+             NodeList listeNoeudVoyages = document.getElementsByTagName("voyage");
+             Element noeudVoyage = (Element) listeNoeudVoyages.item(0);
+             
+             String nom = noeudVoyage.getElementsByTagName("nom").item(0).getTextContent();
+             String destination = noeudVoyage.getElementsByTagName("destination").item(0).getTextContent();
+             String description = noeudVoyage.getElementsByTagName("description").item(0).getTextContent();
+             int distance = Integer.parseInt(noeudVoyage.getElementsByTagName("distance").item(0).getTextContent());
+             int idVaisseau = Integer.parseInt(noeudVoyage.getElementsByTagName("idvaisseau").item(0).getTextContent());
+             
+             voyage = new Voyage(id, nom, destination, description, distance, idVaisseau);
+
+    	 } catch (ParserConfigurationException e) {
+             e.printStackTrace();
+         } catch (IOException e) {
+             e.printStackTrace();
+         } catch (SAXException e) {
+             e.printStackTrace();
+         }
+    	 
+    	return voyage;
     }
     private String recupererXML( String stringUrlXML,String delimiteur)
     {
