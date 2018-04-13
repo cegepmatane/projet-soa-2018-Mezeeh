@@ -28,9 +28,10 @@
               <voyage>
                   <id><?=$voyages['id']?></id>
                   <nom><?=utf8_encode($voyages['nom'])?></nom>
-                  <description><?=utf8_encode($voyages['destination'])?></description>
-                  <capaciter><?=utf8_encode($voyages['description'])?></capaciter>
-                  <porter><?=$voyages['distance']?></porter>
+                  <destination><?=utf8_encode($voyages['destination'])?></destination>
+                  <description><?=utf8_encode($voyages['description'])?></description>
+                  <distance><?=$voyages['distance']?></distance>
+                  <idvaisseau><?=$voyages['idvaisseau']?></idvaisseau>
               </voyage>
               <?php
           }
