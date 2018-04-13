@@ -20,9 +20,15 @@
 
       return $voyages;
     }
-    function lireVoyage()
+    function lireVoyage($id)
     {
+      global $basededonnees;
+      $requete = $basededonnees->prepare("SELECT * FROM voyage WHERE id = :id");
+      $requete->bindParam(':id', $id, PDO::PARAM_INT);
+      $requete->execute();
+      $voyage = $requete->fetch();
 
+      return $voyage;
     }
     function lireVaisseau($id)
     {
