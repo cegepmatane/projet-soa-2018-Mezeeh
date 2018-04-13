@@ -19,26 +19,15 @@ import java.util.Scanner;
 
 public class ServiceDAO {
 
-    protected String xml;
     protected List<Vaisseau> listeVaisseaux;
 
     public ServiceDAO() {
-        xml = "";
         listeVaisseaux = new ArrayList<Vaisseau>();
     }
 
     public List<Vaisseau> listerVaisseaux(){
-
-        try{
-            URL urlListeVaisseaux = new URL("http://localhost/Service/listeComplete.php");
-            InputStream flux = urlListeVaisseaux.openConnection().getInputStream();
-            String derniereBalise = "</servicevoyage>";
-            Scanner lecteur = new Scanner(flux).useDelimiter(derniereBalise);
-            xml = lecteur.next() + derniereBalise;
-            //System.out.println(xml);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    	
+      String xml = this.recupererXML("http://localhost/Service/listeComplete.php", "</servicevoyage>");
 
         if(null == xml) return null;
 
@@ -77,5 +66,19 @@ public class ServiceDAO {
         }
 
         return listeVaisseaux;
+    }
+    private String recupererXML( String stringUrlXML,String delimiteur)
+    {
+    	String xml = "";
+    	  try{
+    		  URL urlXML = new URL(stringUrlXML);
+              InputStream flux = urlXML.openConnection().getInputStream();
+              Scanner lecteur = new Scanner(flux).useDelimiter(delimiteur);
+              xml = lecteur.next() + delimiteur;
+              //System.out.println(xml);
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+    	  return xml;
     }
 }
