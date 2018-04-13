@@ -2,6 +2,7 @@ package ca.qc.cgmatane.informatique.action;
 
 import ca.qc.cgmatane.informatique.dao.ServiceDAO;
 import ca.qc.cgmatane.informatique.modele.Vaisseau;
+import ca.qc.cgmatane.informatique.modele.Voyage;
 import ca.qc.cgmatane.informatique.vue.VaisseauVue;
 
 import java.util.ArrayList;
@@ -16,8 +17,10 @@ public class Controleur {
 
         serviceDAO = new ServiceDAO();
         List<Vaisseau> listeVaisseaux = serviceDAO.listerVaisseaux();
+        List<Voyage> listeVoyages = serviceDAO.listerVoyages();
 
         vue.afficherVaisseaux(listeVaisseaux);
+        vue.afficherVoyages(listeVoyages);
     }
 
     public void chargerInformationsVaisseau(Vaisseau vaisseau){

@@ -2,6 +2,7 @@ package ca.qc.cgmatane.informatique.vue;
 
 import ca.qc.cgmatane.informatique.action.Controleur;
 import ca.qc.cgmatane.informatique.modele.Vaisseau;
+import ca.qc.cgmatane.informatique.modele.Voyage;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -71,6 +72,20 @@ public class VaisseauVue extends Application{
 
         for(String info : informations){
             contenuOngletVaisseaux.getChildren().add(new Text(info));
+        }
+    }
+
+    public void afficherVoyages(List<Voyage> listeVoyages) {
+        for(Voyage voyage : listeVoyages){
+            Button button = new Button(voyage.getNom());
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    //controleur.chargerInformationsVoyage(voyage);
+                    System.out.println(voyage.getNom());
+                }
+            });
+            contenuOngletVoyages.getChildren().add(button);
         }
     }
 }
