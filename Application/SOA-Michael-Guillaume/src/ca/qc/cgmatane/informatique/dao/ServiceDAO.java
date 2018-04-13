@@ -41,8 +41,8 @@ public class ServiceDAO {
             //System.out.println(racine);
 
             NodeList listeNoeudVaisseaux = document.getElementsByTagName("vaisseau");
-            for(int i = 0; i < listeNoeudVaisseaux.getLength(); i++){
-                Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(i);
+            for(int iterateur = 0; iterateur < listeNoeudVaisseaux.getLength(); iterateur++){
+                Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(iterateur);
 
                 int id = Integer.parseInt(noeudVaisseau.getElementsByTagName("id").item(0).getTextContent());
                 String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
@@ -78,9 +78,8 @@ public class ServiceDAO {
               DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
               Document document = parseur.parse(new StringBufferInputStream(xml));
               NodeList listeNoeudVoyages = document.getElementsByTagName("voyage");
-
-              for(int i = 0; i < listeNoeudVoyages.getLength(); i++){
-                  Element noeudVoyage = (Element) listeNoeudVoyages.item(i);
+              for(int iterateur = 0; iterateur < listeNoeudVoyages.getLength(); iterateur++){
+                  Element noeudVoyage = (Element) listeNoeudVoyages.item(iterateur);
 
                   int id = Integer.parseInt(noeudVoyage.getElementsByTagName("id").item(0).getTextContent());
                   String nom = noeudVoyage.getElementsByTagName("nom").item(0).getTextContent();
