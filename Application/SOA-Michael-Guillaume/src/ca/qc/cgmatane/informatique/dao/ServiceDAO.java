@@ -1,6 +1,8 @@
 package ca.qc.cgmatane.informatique.dao;
 
 import ca.qc.cgmatane.informatique.modele.Vaisseau;
+import ca.qc.cgmatane.informatique.modele.Voyage;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -20,26 +22,25 @@ import java.util.Scanner;
 public class ServiceDAO {
 
     protected List<Vaisseau> listeVaisseaux;
+    protected List<Voyage> listeVoyages;
 
     public ServiceDAO() {
         listeVaisseaux = new ArrayList<Vaisseau>();
+        listeVoyages = new ArrayList<Voyage>();
     }
 
     public List<Vaisseau> listerVaisseaux(){
     	
-      String xml = this.recupererXML("http://localhost/Service/listeComplete.php", "</servicevoyage>");
+      String xml = this.recupererXML("http://localhost/Service/vaisseau/liste.php", "</vaisseaux>");
 
         if(null == xml) return null;
 
         try {
             DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = parseur.parse(new StringBufferInputStream(xml));
-            String racine = document.getDocumentElement().getNodeName();
             //System.out.println(racine);
 
             NodeList listeNoeudVaisseaux = document.getElementsByTagName("vaisseau");
-            //for(Iterator<Vaisseau> iterateur = listeVaisseaux.iterator(); iterateur.hasNext();){
-            //for (Vaisseau v : listeVaisseaux) {
             for(int i = 0; i < listeNoeudVaisseaux.getLength(); i++){
                 Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(i);
 
@@ -64,9 +65,41 @@ public class ServiceDAO {
         } catch (SAXException e) {
             e.printStackTrace();
         }
-
         return listeVaisseaux;
     }
+    public List<Voyage> listerVoyages(){
+    	
+        String xml = this.recupererXML("http://localhost/Service/voyage/liste.php", "</voyages>");
+        System.out.println(xml);
+          if(null == xml) return null;
+
+          try {
+              DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+              Document document = parseur.parse(new StringBufferInputStream(xml));
+              NodeList listeNoeudVoyages = document.getElementsByTagName("voyage");
+
+              for(int i = 0; i < listeNoeudVoyages.getLength(); i++){
+                  Element noeudVoyage = (Element) listeNoeudVoyages.item(i);
+
+                  int id = Integer.parseInt(noeudVoyage.getElementsByTagName("id").item(0).getTextContent());
+                  String nom = noeudVoyage.getElementsByTagName("nom").item(0).getTextContent();
+                  String destination = noeudVoyage.getElementsByTagName("destination").item(0).getTextContent();
+                  String description = noeudVoyage.getElementsByTagName("description").item(0).getTextContent();
+                  int distance = Integer.parseInt(noeudVoyage.getElementsByTagName("distance").item(0).getTextContent());
+                  int idVaisseau = Integer.parseInt(noeudVoyage.getElementsByTagName("idvaisseau").item(0).getTextContent());
+                  
+                  listeVoyages.add(new Voyage(id, nom, destination, description, distance, idVaisseau));
+              }
+          } catch (ParserConfigurationException e) {
+              e.printStackTrace();
+          } catch (IOException e) {
+              e.printStackTrace();
+          } catch (SAXException e) {
+              e.printStackTrace();
+          }
+
+          return listeVoyages;
+      }
     private String recupererXML( String stringUrlXML,String delimiteur)
     {
     	String xml = "";
