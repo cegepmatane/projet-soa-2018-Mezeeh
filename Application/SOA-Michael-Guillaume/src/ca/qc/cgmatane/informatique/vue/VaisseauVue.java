@@ -60,7 +60,7 @@ public class VaisseauVue extends Application{
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
-                    controleur.chargerInformationsVaisseau(vaisseau);
+                    controleur.chargerInformationsVaisseau(vaisseau.getId());
                 }
             });
             contenuOngletVaisseaux.getChildren().add(button);

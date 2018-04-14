@@ -124,7 +124,7 @@ public class ServiceDAO {
          } catch (SAXException e) {
              e.printStackTrace();
          }
-    	 
+
     	return vaisseau;
     }
     public Voyage recupererVoyage(int id)
@@ -169,5 +169,48 @@ public class ServiceDAO {
               e.printStackTrace();
           }
     	  return xml;
+    }
+
+    public List<Voyage>recupererVoyagesSelonVaisseau(int idVaisseauVoyage){
+        List<Voyage> voyagesDuVaisseau = new ArrayList<Voyage>();
+
+        String xml = this.recupererXML("http://localhost/Service/voyage/voyagesVaisseau.php?id="+idVaisseauVoyage, "</voyages>");
+        if(null == xml) return null;
+        try {
+            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = parseur.parse(new StringBufferInputStream(xml));
+            NodeList listeNoeudVaisseaux = document.getElementsByTagName("voyage");
+
+            for(int iterateur = 0; iterateur < listeNoeudVaisseaux.getLength(); iterateur++) {
+                Element noeudVoyage = (Element) listeNoeudVaisseaux.item(iterateur);
+
+                //System.out.println(noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent());
+
+                int id = Integer.parseInt(noeudVoyage.getElementsByTagName("id").item(0).getTextContent());
+                String nom = noeudVoyage.getElementsByTagName("nom").item(0).getTextContent();
+                String destination = noeudVoyage.getElementsByTagName("destination").item(0).getTextContent();
+                String description = noeudVoyage.getElementsByTagName("description").item(0).getTextContent();
+                int distance = Integer.parseInt(noeudVoyage.getElementsByTagName("distance").item(0).getTextContent());
+                int idVaisseau = Integer.parseInt(noeudVoyage.getElementsByTagName("idvaisseau").item(0).getTextContent());
+
+                System.out.println("ID : " + id);
+                System.out.println("Nom : " + nom);
+                System.out.println("Destination : " + destination);
+                System.out.println("Description : " + description);
+                System.out.println("Distance : " + distance);
+                System.out.println("ID du vaisseau : " + idVaisseau);
+
+                voyagesDuVaisseau.add(new Voyage(id, nom, destination, description, distance, idVaisseau));
+            }
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+        return voyagesDuVaisseau;
     }
 }
