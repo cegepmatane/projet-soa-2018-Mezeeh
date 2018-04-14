@@ -25,14 +25,24 @@ public class Controleur {
 
     public void chargerInformationsVaisseau(int idVaisseau){
         Vaisseau vaisseau = serviceDAO.recupererVaisseau(idVaisseau);
-        List<Voyage> voyageVaisseau = serviceDAO.recupererVoyagesSelonVaisseau(idVaisseau);
+        List<Voyage> voyagesVaisseau = serviceDAO.recupererVoyagesSelonVaisseau(idVaisseau);
 
         List<String> informations = new ArrayList<String>();
-        informations.add("ID : "  + vaisseau.getId());
-        informations.add("Nom : "  + vaisseau.getNom());
+        informations.add(vaisseau.getNom());
+        //informations.add("ID : "  + vaisseau.getId());
         informations.add("Description : "  + vaisseau.getDescription());
         informations.add("Capacité : "  + vaisseau.getCapaciter() + " personne(s)");
         informations.add("Porter : "  + vaisseau.getPorter() + " km");
+
+        informations.add("\nVoyages");
+        for(Voyage voyage : voyagesVaisseau){
+            //informations.add("ID : " + voyage.getId());
+            informations.add("Nom : " + voyage.getNom());
+            informations.add("Destination : " + voyage.getDestination());
+            informations.add("Description : " + voyage.getDescription());
+            informations.add("Distance : " + voyage.getDistance() + " km");
+            //informations.add("ID Vaisseau : " + voyage.getIdVaisseau());
+        }
 
         vue.afficherInformationsVaisseau(informations);
     }
