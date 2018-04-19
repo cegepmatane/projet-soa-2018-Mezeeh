@@ -1,13 +1,13 @@
 <?php
-  include_once "../ServiceDao.php";
-  $dao = new ServiceDao();
-  $voyages = $dao->lireVoyagesVaisseau($_GET['id']);
-  //var_dump($voyages);
+  include "../../ServiceDao.php";
+  $serviceDao = new ServiceDao();
+  $listevoyages = $serviceDao->lirevoyages();
+  //print_r($listevoyages);
   header("Content-type: text/xml");
   echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 <voyages>
-  <?php foreach($voyages as $voyage){?>
+  <?php foreach($listevoyages as $voyage){?>
       <voyage>
           <id><?=$voyage['id']?></id>
           <nom><?=utf8_encode($voyage['nom'])?></nom>
