@@ -58,15 +58,15 @@
     function ajouterVoyages($voyage)
     {
       global $basededonnees;
-			$SQL_AJOUTER_VOYAGE = "INSERT INTO voyage(id, nom, destination, description, distance, idvaisseau) VALUES(:id, :nom, :destination, :description, :distance, :idvaisseau)";
-			$requeteAjouter = $basededonnees->prepare($SQL_AJOUTER_VOYAGE);
-			$requeteAjouter->bindParam(':id', $pensee['id'], PDO::PARAM_STR);
-			$requeteAjouter->bindParam(':nom', $pensee['nom'], PDO::PARAM_STR);
-			$requeteAjouter->bindParam(':description', $pensee['destination'], PDO::PARAM_STR);
-			$requeteAjouter->bindParam(':description',$pensee['description'], PDO::PARAM_STR);
-      $requeteAjouter->bindParam(':distance', $pensee['distance'], PDO::PARAM_STR);
-      $requeteAjouter->bindParam(':idvaisseau',$pensee['idvaisseau'], PDO::PARAM_STR);
-			$requeteAjouter->execute();
+      $SQL_AJOUTER_VOYAGE = "INSERT INTO voyage(nom, destination, description, distance, idvaisseau) VALUES(:nom, :destination, :description, :distance, :idvaisseau)";
+      $requeteAjouter = $basededonnees->prepare($SQL_AJOUTER_VOYAGE);
+      $requeteAjouter->bindParam(':nom', $voyage['nom'], PDO::PARAM_STR);
+      $requeteAjouter->bindParam(':destination', $voyage['destination'], PDO::PARAM_STR);
+      $requeteAjouter->bindParam(':description',$voyage['description'], PDO::PARAM_STR);
+      $requeteAjouter->bindParam(':distance', $voyage['distance'], PDO::PARAM_STR);
+      $requeteAjouter->bindParam(':idvaisseau',$voyage['idvaisseau'], PDO::PARAM_STR);
+      //print_r($requeteAjouter);
+	  return $requeteAjouter->execute();
     }
   }
 ?>

@@ -1,5 +1,5 @@
 <?php
-  include_once "../serviceDao.php";
+  include_once "../accesseur/serviceDao.php";
   $dao = new ServiceDao();
   $voyage = $dao->lireVoyage($_GET['id']);
   //var_dump($voyage);
