@@ -11,9 +11,9 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringBufferInputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
 
     protected List<Vaisseau> listeVaisseaux;
     protected List<Voyage> listeVoyages;
+    protected String xml;
 
     public ServiceDAO() {
         listeVaisseaux = new ArrayList<Vaisseau>();
@@ -31,7 +32,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
 
     public List<Vaisseau> listerVaisseaux(){
     	
-      String xml = this.recupererXML(URL_LISTER_VAISSEAUX, "</vaisseaux>");
+      xml = this.recupererXML(URL_LISTER_VAISSEAUX, "</vaisseaux>");
 
         if(null == xml) return null;
 
@@ -69,7 +70,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
     }
     public List<Voyage> listerVoyages(){
     	
-        String xml = this.recupererXML(URL_LISTER_VOYAGES, "</voyages>");
+        xml = this.recupererXML(URL_LISTER_VOYAGES, "</voyages>");
         //System.out.println(xml);
           if(null == xml) return null;
 
@@ -80,7 +81,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
     public Vaisseau recupererVaisseau(int id)
     {
     	Vaisseau vaisseau = null;
-    	String xml = this.recupererXML(URL_RECUPERER_VAISSEAU + id, "</vaisseau>");
+    	xml = this.recupererXML(URL_RECUPERER_VAISSEAU + id, "</vaisseau>");
     	if(null == xml) return null;
     	 try {
              DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -108,7 +109,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
     public Voyage recupererVoyage(int id)
     {
     	Voyage voyage = null;
-    	String xml = this.recupererXML(URL_RECUPERER_VOYAGE + id, "</voyage>");
+    	xml = this.recupererXML(URL_RECUPERER_VOYAGE + id, "</voyage>");
     	if(null == xml) return null;
     	 try {
              DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -136,7 +137,6 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
     }
     private String recupererXML( String stringUrlXML,String delimiteur)
     {
-    	String xml = "";
     	  try{
     		  URL urlXML = new URL(stringUrlXML);
               InputStream flux = urlXML.openConnection().getInputStream();
@@ -192,6 +192,43 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ajouterVoyage(Voyage voyage)
+    {
+        try {
+            URL urlAjouterPensee = new URL(URL_AJOUTER_VOYAGE);
+            HttpURLConnection connection = (HttpURLConnection) urlAjouterPensee.openConnection();
+            connection.setDoOutput(true);
+            connection.setRequestMethod("POST");
+            //connection.setRequestProperty("User-Agent", "Java client");
+            //connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+            OutputStream fluxEcriture = connection.getOutputStream();
+            OutputStreamWriter envoyeur = new OutputStreamWriter(fluxEcriture);
+
+            envoyeur.write("nom=" + voyage.getNom()
+                            +"&destination=" + voyage.getDestination()
+                            +"&description=" + voyage.getDescription()
+                            +"&distance=" + voyage.getDistance()
+                            +"&idvaisseau=" + voyage.getIdVaisseau());
+            envoyeur.close();
+
+            InputStream fluxLecture = connection.getInputStream(); // NE PAS RETIRER NECESSAIRE AU FONCTIONNEMENT
+            /*Scanner lecteur = new Scanner(fluxLecture);
+
+            String derniereBalise = "</action>";
+            lecteur.useDelimiter(derniereBalise);
+            xml = lecteur.next() + derniereBalise;
+            lecteur.close();
+            System.out.println(xml); */
+            connection.disconnect();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -17,6 +17,14 @@ public class Voyage {
 		this.idVaisseau = idVaisseau;
 	}
 
+	public Voyage(String nom, String destination, String description, int distance, int idVaisseau) {
+		this.nom = nom;
+		this.destination = destination;
+		this.description = description;
+		this.distance = distance;
+		this.idVaisseau = idVaisseau;
+	}
+
 	public int getId() {
 		return id;
 	}
