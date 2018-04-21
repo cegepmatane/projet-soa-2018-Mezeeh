@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ServiceDAO {
+public class ServiceDAO implements VoyageURL, VaisseauURL{
 
     protected List<Vaisseau> listeVaisseaux;
     protected List<Voyage> listeVoyages;
@@ -31,7 +31,7 @@ public class ServiceDAO {
 
     public List<Vaisseau> listerVaisseaux(){
     	
-      String xml = this.recupererXML("http://localhost/Service/vaisseau/liste.php", "</vaisseaux>");
+      String xml = this.recupererXML(URL_LISTER_VAISSEAUX, "</vaisseaux>");
 
         if(null == xml) return null;
 
@@ -69,7 +69,7 @@ public class ServiceDAO {
     }
     public List<Voyage> listerVoyages(){
     	
-        String xml = this.recupererXML("http://localhost/Service/voyage/liste.php", "</voyages>");
+        String xml = this.recupererXML(URL_LISTER_VOYAGES, "</voyages>");
         //System.out.println(xml);
           if(null == xml) return null;
 
@@ -80,7 +80,7 @@ public class ServiceDAO {
     public Vaisseau recupererVaisseau(int id)
     {
     	Vaisseau vaisseau = null;
-    	String xml = this.recupererXML("http://localhost/Service/vaisseau/vaisseau.php?id="+id, "</vaisseau>");
+    	String xml = this.recupererXML(URL_RECUPERER_VAISSEAU + id, "</vaisseau>");
     	if(null == xml) return null;
     	 try {
              DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -108,7 +108,7 @@ public class ServiceDAO {
     public Voyage recupererVoyage(int id)
     {
     	Voyage voyage = null;
-    	String xml = this.recupererXML("http://localhost/Service/voyage/voyage.php?id="+id, "</voyage>");
+    	String xml = this.recupererXML(URL_RECUPERER_VOYAGE + id, "</voyage>");
     	if(null == xml) return null;
     	 try {
              DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -152,7 +152,7 @@ public class ServiceDAO {
     public List<Voyage>recupererVoyagesSelonVaisseau(int idVaisseauVoyage){
         List<Voyage> voyagesDuVaisseau = new ArrayList<Voyage>();
 
-        String xml = this.recupererXML("http://localhost/Service/voyage/voyagesVaisseau.php?id="+idVaisseauVoyage, "</voyages>");
+        String xml = this.recupererXML(URL_VOYAGES_SELON_VAISSEAU + idVaisseauVoyage, "</voyages>");
         if(null == xml) return null;
         rechercheSpecifique(voyagesDuVaisseau, xml);
 

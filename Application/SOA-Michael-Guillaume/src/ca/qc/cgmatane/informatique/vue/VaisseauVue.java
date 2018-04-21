@@ -30,10 +30,13 @@ public class VaisseauVue extends Application{
     protected Tab ongletVaisseaux,
             ongletVoyages;
 
+    protected Stage scenePrincipal;
+
     @Override
     public void start(Stage scenePrincipal) throws Exception {
         onglets = new TabPane();
 
+        this.scenePrincipal = scenePrincipal;
         scenePrincipal.setScene(new Scene(onglets,largeurFenetre, hauteurFenetre));
         scenePrincipal.setTitle(nomFenetre);
 
@@ -71,7 +74,10 @@ public class VaisseauVue extends Application{
         contenuOngletVaisseaux.getChildren().clear();
 
         for(String info : informations){
-            contenuOngletVaisseaux.getChildren().add(new Text(info));
+            Text texte = new Text(info);
+            texte.wrappingWidthProperty().bind(scenePrincipal.widthProperty().subtract(15));
+            // contenuOngletVaisseaux.getChildren().add(new Text(info));
+            contenuOngletVaisseaux.getChildren().add(texte);
         }
     }
 
