@@ -21,7 +21,21 @@ public class Controleur {
 
         vue.afficherVaisseaux(listeVaisseaux);
         vue.afficherVoyages(listeVoyages);
+        vue.afficherAjouterVoyage();
     }
+	public void ajouterVoyage(String nom, String destination, String description, String distance, String idVaisseau)
+	{
+		Voyage voyage = new Voyage(nom, destination, description, this.parseInt(distance), this.parseInt(idVaisseau));
+		serviceDAO.ajouterVoyage(voyage);
+	}
+	private int parseInt(String texte)
+	{
+		try{
+			return Integer.parseInt(texte);
+		}catch(Exception e){
+			return 1;
+		}
+	}
     public void afflicherListeVaisseaux()
     {
     	 vue.afficherVaisseaux(listeVaisseaux);
