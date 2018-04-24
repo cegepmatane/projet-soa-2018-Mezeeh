@@ -6,12 +6,7 @@ import ca.qc.cgmatane.informatique.vue.VaisseauVue;
 
 public class App {
     public static void main(String[] args) {
-        /*VaisseauVue vaisseauVue = new VaisseauVue();
-        vaisseauVue.launch(VaisseauVue.class, args);*/
-
-        Voyage voyage = new Voyage("a", "b", "c", 1, 2);
-
-        ServiceDAO serviceDAO = new ServiceDAO();
-        serviceDAO.ajouterVoyage(voyage);
+        VaisseauVue vaisseauVue = new VaisseauVue();
+        vaisseauVue.launch(VaisseauVue.class, args);
     }
 }

@@ -11,18 +11,21 @@ import java.util.List;
 public class Controleur {
     protected ServiceDAO serviceDAO;
     protected VaisseauVue vue;
-
+    protected List<Vaisseau> listeVaisseaux;
     public Controleur(VaisseauVue vue) {
         this.vue = vue;
 
         serviceDAO = new ServiceDAO();
-        List<Vaisseau> listeVaisseaux = serviceDAO.listerVaisseaux();
+        listeVaisseaux = serviceDAO.listerVaisseaux();
         List<Voyage> listeVoyages = serviceDAO.listerVoyages();
 
         vue.afficherVaisseaux(listeVaisseaux);
         vue.afficherVoyages(listeVoyages);
     }
-
+    public void afflicherListeVaisseaux()
+    {
+    	 vue.afficherVaisseaux(listeVaisseaux);
+    }
     public void chargerInformationsVaisseau(int idVaisseau){
         Vaisseau vaisseau = serviceDAO.recupererVaisseau(idVaisseau);
         List<Voyage> voyagesVaisseau = serviceDAO.recupererVoyagesSelonVaisseau(idVaisseau);

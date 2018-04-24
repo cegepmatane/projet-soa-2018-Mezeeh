@@ -6,6 +6,7 @@ import ca.qc.cgmatane.informatique.modele.Voyage;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -58,6 +59,7 @@ public class VaisseauVue extends Application{
     }
 
     public void afficherVaisseaux(List<Vaisseau> listeVaisseaux) {
+    	contenuOngletVaisseaux.getChildren().clear();
         for(Vaisseau vaisseau : listeVaisseaux){
             Button button = new Button(vaisseau.getNom());
             button.setOnAction(new EventHandler<ActionEvent>() {
@@ -79,6 +81,16 @@ public class VaisseauVue extends Application{
             // contenuOngletVaisseaux.getChildren().add(new Text(info));
             contenuOngletVaisseaux.getChildren().add(texte);
         }
+        Button boutton = new Button("retour");
+        boutton.setAlignment(Pos.BOTTOM_RIGHT);
+        boutton.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				controleur.afflicherListeVaisseaux();
+			}
+        });
+        contenuOngletVaisseaux.getChildren().add(boutton);
     }
 
     public void afficherVoyages(List<Voyage> listeVoyages) {
