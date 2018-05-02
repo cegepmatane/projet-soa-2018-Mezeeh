@@ -16,13 +16,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class ServiceDAO implements VoyageURL, VaisseauURL{
 
-    protected List<Vaisseau> listeVaisseaux;
-    protected List<Voyage> listeVoyages;
+    protected HashMap<Integer, Vaisseau> listeVaisseaux;
+    protected HashMap<Integer, Voyage> listeVoyages;
     protected String xml;
 
     public ServiceDAO() {
@@ -33,7 +35,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
     public List<Vaisseau> listerVaisseaux(){
     
     	if(null == listeVaisseaux){
-    		listeVaisseaux = new ArrayList<Vaisseau>();
+    		listeVaisseaux = new HashMap<Integer, Vaisseau>();
 	    	xml = this.recupererXML(URL_LISTER_VAISSEAUX, "</vaisseaux>");
 	
 	    	if(null == xml) return null;
@@ -57,7 +59,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
 	               System.out.println("capaciter = " + capaciter);
 	               System.out.println("porter = " + porter);*/
 	
-	               listeVaisseaux.add(new Vaisseau(id, nom, description, capaciter, porter));
+	               listeVaisseaux.put(id,new Vaisseau(id, nom, description, capaciter, porter));
 	            }
 	        } catch (ParserConfigurationException e) {
 	            e.printStackTrace();
@@ -67,49 +69,60 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
 	            e.printStackTrace();
 	        }
     	}
-        return listeVaisseaux;
+    	List<Vaisseau> liste = new ArrayList<>();
+    	  for(Entry<Integer, Vaisseau> entree : listeVaisseaux.entrySet()){
+    		liste.add(entree.getValue());
+    	}
+        return liste;
     }
     public List<Voyage> listerVoyages(){
     	if(null == listeVoyages){
-    		listeVoyages = new ArrayList<Voyage>();
+    		listeVoyages = new HashMap<Integer, Voyage>();
         xml = this.recupererXML(URL_LISTER_VOYAGES, "</voyages>");
         //System.out.println(xml);
           if(null == xml) return null;
 
         rechercheSpecifique(listeVoyages, xml);
     	}
-        return listeVoyages;
+    	List<Voyage> liste = new ArrayList<>();
+  	  for(Entry<Integer, Voyage> entree : listeVoyages.entrySet()){
+  		liste.add(entree.getValue());
+  	}
+        return liste;
       }
     public Vaisseau recupererVaisseau(int id)
     {
-    	Vaisseau vaisseau = null;
-    	xml = this.recupererXML(URL_RECUPERER_VAISSEAU + id, "</vaisseau>");
-    	if(null == xml) return null;
-    	 try {
-             DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-             Document document = parseur.parse(new StringBufferInputStream(xml));
-             NodeList listeNoeudVaisseaux = document.getElementsByTagName("vaisseau");
-             Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(0);
-             
-             String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
-             String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
-             int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
-             int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
-             
-             vaisseau = new Vaisseau(id, nom, description, capaciter, porter);
-
-    	 } catch (ParserConfigurationException e) {
-             e.printStackTrace();
-         } catch (IOException e) {
-             e.printStackTrace();
-         } catch (SAXException e) {
-             e.printStackTrace();
-         }
-
-    	return vaisseau;
+    	if(null == listeVaisseaux.get(id)){
+	    	Vaisseau vaisseau = null;
+	    	xml = this.recupererXML(URL_RECUPERER_VAISSEAU + id, "</vaisseau>");
+	    	if(null == xml) return null;
+	    	 try {
+	             DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	             Document document = parseur.parse(new StringBufferInputStream(xml));
+	             NodeList listeNoeudVaisseaux = document.getElementsByTagName("vaisseau");
+	             Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(0);
+	             
+	             String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
+	             String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
+	             int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
+	             int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
+	             
+	             vaisseau = new Vaisseau(id, nom, description, capaciter, porter);
+	
+	    	 } catch (ParserConfigurationException e) {
+	             e.printStackTrace();
+	         } catch (IOException e) {
+	             e.printStackTrace();
+	         } catch (SAXException e) {
+	             e.printStackTrace();
+	         }
+	    	 listeVaisseaux.put(id, vaisseau);
+	    }
+    	return listeVaisseaux.get(id);
     }
     public Voyage recupererVoyage(int id)
     {
+    	if(null == listeVoyages.get(id)){
     	Voyage voyage = null;
     	xml = this.recupererXML(URL_RECUPERER_VOYAGE + id, "</voyage>");
     	if(null == xml) return null;
@@ -134,8 +147,9 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
          } catch (SAXException e) {
              e.printStackTrace();
          }
-    	 
-    	return voyage;
+    	 listeVoyages.put(id, voyage);
+    	}
+    	return listeVoyages.get(id);
     }
     private String recupererXML( String stringUrlXML,String delimiteur)
     {
@@ -152,16 +166,16 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
     }
 
     public List<Voyage>recupererVoyagesSelonVaisseau(int idVaisseauVoyage){
-        List<Voyage> voyagesDuVaisseau = new ArrayList<Voyage>();
 
-        String xml = this.recupererXML(URL_VOYAGES_SELON_VAISSEAU + idVaisseauVoyage, "</voyages>");
-        if(null == xml) return null;
-        rechercheSpecifique(voyagesDuVaisseau, xml);
-
-        return voyagesDuVaisseau;
+        List<Voyage> liste = new ArrayList<>();
+    	  for(Entry<Integer, Voyage> entree : listeVoyages.entrySet()){
+    		  if(entree.getValue().getIdVaisseau() == idVaisseauVoyage)
+    			  liste.add(entree.getValue());
+    	  }
+        return liste;
     }
 
-    private void rechercheSpecifique(List<Voyage> voyagesDuVaisseau, String xml) {
+    private void rechercheSpecifique(HashMap<Integer, Voyage> voyagesDuVaisseau, String xml) {
         try {
             DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = parseur.parse(new StringBufferInputStream(xml));
@@ -186,7 +200,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
                 System.out.println("Distance : " + distance);
                 System.out.println("ID du vaisseau : " + idVaisseau);*/
 
-                voyagesDuVaisseau.add(new Voyage(id, nom, destination, description, distance, idVaisseau));
+                voyagesDuVaisseau.put(id, new Voyage(id, nom, destination, description, distance, idVaisseau));
             }
 
         } catch (ParserConfigurationException e) {
