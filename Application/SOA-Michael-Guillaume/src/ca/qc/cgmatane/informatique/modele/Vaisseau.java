@@ -23,7 +23,7 @@ public class Vaisseau {
         this.listeVoyages = new ArrayList<Voyage>();
     }
 
-    public void ajouterVoyage(Voyage voyage){
+	public void ajouterVoyage(Voyage voyage){
         if(null != voyage){
             voyage.setVaisseau(this);
             this.listeVoyages.add(voyage);
