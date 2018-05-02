@@ -26,56 +26,58 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
     protected String xml;
 
     public ServiceDAO() {
-        listeVaisseaux = new ArrayList<Vaisseau>();
-        listeVoyages = new ArrayList<Voyage>();
+        listeVaisseaux = null;
+        listeVoyages = null;
     }
 
     public List<Vaisseau> listerVaisseaux(){
-    	
-      xml = this.recupererXML(URL_LISTER_VAISSEAUX, "</vaisseaux>");
-
-        if(null == xml) return null;
-
-        try {
-            DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document document = parseur.parse(new StringBufferInputStream(xml));
-            //System.out.println(racine);
-
-            NodeList listeNoeudVaisseaux = document.getElementsByTagName("vaisseau");
-            for(int iterateur = 0; iterateur < listeNoeudVaisseaux.getLength(); iterateur++){
-                Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(iterateur);
-
-                int id = Integer.parseInt(noeudVaisseau.getElementsByTagName("id").item(0).getTextContent());
-                String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
-                String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
-                int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
-                int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
-
-                /*System.out.println("id = " + id);
-                System.out.println("nom = " + nom);
-                System.out.println("description = " + description);
-                System.out.println("capaciter = " + capaciter);
-                System.out.println("porter = " + porter);*/
-
-                listeVaisseaux.add(new Vaisseau(id, nom, description, capaciter, porter));
-            }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        }
+    
+    	if(null == listeVaisseaux){
+    		listeVaisseaux = new ArrayList<Vaisseau>();
+	    	xml = this.recupererXML(URL_LISTER_VAISSEAUX, "</vaisseaux>");
+	
+	    	if(null == xml) return null;
+	
+	    	try {
+	           DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+	           Document document = parseur.parse(new StringBufferInputStream(xml));
+	           //System.out.println(racine);
+	           NodeList listeNoeudVaisseaux = document.getElementsByTagName("vaisseau");
+	           for(int iterateur = 0; iterateur < listeNoeudVaisseaux.getLength(); iterateur++){
+	        	   Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(iterateur);
+	
+	               int id = Integer.parseInt(noeudVaisseau.getElementsByTagName("id").item(0).getTextContent());
+	               String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
+	               String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
+	               int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
+	               int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
+	               /*System.out.println("id = " + id);
+	               System.out.println("nom = " + nom);
+	               System.out.println("description = " + description);
+	               System.out.println("capaciter = " + capaciter);
+	               System.out.println("porter = " + porter);*/
+	
+	               listeVaisseaux.add(new Vaisseau(id, nom, description, capaciter, porter));
+	            }
+	        } catch (ParserConfigurationException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        } catch (SAXException e) {
+	            e.printStackTrace();
+	        }
+    	}
         return listeVaisseaux;
     }
     public List<Voyage> listerVoyages(){
-    	
+    	if(null == listeVoyages){
+    		listeVoyages = new ArrayList<Voyage>();
         xml = this.recupererXML(URL_LISTER_VOYAGES, "</voyages>");
         //System.out.println(xml);
           if(null == xml) return null;
 
         rechercheSpecifique(listeVoyages, xml);
-
+    	}
         return listeVoyages;
       }
     public Vaisseau recupererVaisseau(int id)
