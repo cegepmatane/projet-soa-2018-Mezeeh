@@ -6,7 +6,8 @@ import java.util.List;
 public class Vaisseau {
     protected int id,
                 capaciter,
-                porter;
+                porter,
+                nombreVoyages;
 
     protected String nom,
                     description;
@@ -24,10 +25,18 @@ public class Vaisseau {
     }
 
     public void ajouterVoyage(Voyage voyage){
-        if(null != voyage){
+        if(null != voyage && !listeVoyages.contains(voyage)){
             voyage.setVaisseau(this);
             this.listeVoyages.add(voyage);
         }
+    }
+
+    public int getNombreVoyages() {
+        return nombreVoyages;
+    }
+
+    public void setNombreVoyages(int nombreVoyages) {
+        this.nombreVoyages = nombreVoyages;
     }
 
     public int getId() {

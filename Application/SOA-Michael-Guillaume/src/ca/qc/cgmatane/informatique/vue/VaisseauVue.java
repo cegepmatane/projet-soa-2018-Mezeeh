@@ -119,7 +119,7 @@ public class VaisseauVue extends Application{
     public void afficherVaisseaux(List<Vaisseau> listeVaisseaux) {
     	contenuOngletVaisseaux.getChildren().clear();
         for(Vaisseau vaisseau : listeVaisseaux){
-            Button button = new Button(vaisseau.getNom());
+            Button button = new Button(vaisseau.getNom() + " (" + vaisseau.getNombreVoyages() + " voyages)");
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
