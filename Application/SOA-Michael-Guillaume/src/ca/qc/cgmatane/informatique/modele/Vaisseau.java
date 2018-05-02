@@ -24,7 +24,7 @@ public class Vaisseau {
     }
 
     public void ajouterVoyage(Voyage voyage){
-        if(null == voyage){
+        if(null != voyage){
             voyage.setVaisseau(this);
             this.listeVoyages.add(voyage);
         }

@@ -12,22 +12,26 @@ public class Controleur {
     protected ServiceDAO serviceDAO;
     protected VaisseauVue vue;
     protected List<Vaisseau> listeVaisseaux;
+    protected List<Voyage> listeVoyages;
+
     public Controleur(VaisseauVue vue) {
         this.vue = vue;
 
         serviceDAO = new ServiceDAO();
         listeVaisseaux = serviceDAO.listerVaisseaux();
-        List<Voyage> listeVoyages = serviceDAO.listerVoyages();
+        listeVoyages = serviceDAO.listerVoyages();
 
         vue.afficherVaisseaux(listeVaisseaux);
         vue.afficherVoyages(listeVoyages);
         vue.afficherAjouterVoyage();
     }
+
 	public void ajouterVoyage(String nom, String destination, String description, String distance, String idVaisseau)
-	{
+    {
 		Voyage voyage = new Voyage(nom, destination, description, this.parseInt(distance), this.parseInt(idVaisseau));
 		serviceDAO.ajouterVoyage(voyage);
 	}
+
 	private int parseInt(String texte)
 	{
 		try{
@@ -36,13 +40,16 @@ public class Controleur {
 			return 1;
 		}
 	}
+
     public void afflicherListeVaisseaux()
     {
     	 vue.afficherVaisseaux(listeVaisseaux);
     }
+
     public void chargerInformationsVaisseau(int idVaisseau){
-        Vaisseau vaisseau = serviceDAO.recupererVaisseau(idVaisseau);
-        List<Voyage> voyagesVaisseau = serviceDAO.recupererVoyagesSelonVaisseau(idVaisseau);
+        Vaisseau vaisseau = serviceDAO.recupererInformationsVaisseau(idVaisseau);
+        List<Voyage> voyagesVaisseau = vaisseau.getListeVoyages();
+        System.out.println(voyagesVaisseau.size());
 
         List<String> informations = new ArrayList<String>();
         informations.add(vaisseau.getNom());
