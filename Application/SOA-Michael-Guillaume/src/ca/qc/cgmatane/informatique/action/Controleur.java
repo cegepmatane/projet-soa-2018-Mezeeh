@@ -49,7 +49,6 @@ public class Controleur {
     public void chargerInformationsVaisseau(int idVaisseau){
         Vaisseau vaisseau = serviceDAO.recupererInformationsVaisseau(idVaisseau);
         List<Voyage> voyagesVaisseau = vaisseau.getListeVoyages();
-        System.out.println(voyagesVaisseau.size());
 
         List<String> informations = new ArrayList<String>();
         informations.add(vaisseau.getNom());

@@ -64,13 +64,17 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
                     String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
                     int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
                     int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
+                    int nombreVoyages = Integer.parseInt(noeudVaisseau.getElementsByTagName("nombreVoyages").item(0).getTextContent());
 	               /*System.out.println("id = " + id);
 	               System.out.println("nom = " + nom);
 	               System.out.println("description = " + description);
 	               System.out.println("capaciter = " + capaciter);
 	               System.out.println("porter = " + porter);*/
 
-                    listeVaisseaux.put(id,new Vaisseau(id, nom, description, capaciter, porter));
+	               Vaisseau vaisseau = new Vaisseau(id, nom, description, capaciter, porter);
+	               vaisseau.setNombreVoyages(nombreVoyages);
+
+	               listeVaisseaux.put(id, vaisseau);
                 }
             } catch (ParserConfigurationException e) {
                 e.printStackTrace();
