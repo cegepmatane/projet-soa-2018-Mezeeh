@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le :  jeu. 12 avr. 2018 à 16:52
+-- Généré le :  mer. 02 mai 2018 à 12:50
 -- Version du serveur :  5.7.21
--- Version de PHP :  7.1.13
+-- Version de PHP :  7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,19 +33,20 @@ CREATE TABLE `vaisseau` (
   `nom` varchar(100) NOT NULL,
   `description` varchar(1000) NOT NULL,
   `capaciter` int(11) NOT NULL,
-  `porter` int(11) NOT NULL
+  `porter` int(11) NOT NULL,
+  `nombreVoyages` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `vaisseau`
 --
 
-INSERT INTO `vaisseau` (`id`, `nom`, `description`, `capaciter`, `porter`) VALUES
-(1, 'Retaliator', 'un vaisseau de combat', 2, 1000000),
-(2, 'Iteron MKV', 'un vaisseau de transport', 100, 500000),
-(3, 'Ark', 'vaisseau de transport comercial', 1000, 1500000),
-(4, 'Reliant Kore', 'petit vaisseau d\'exploration', 2, 1000000),
-(5, 'Naglfar', 'vaisseau de combat ', 50, 1500000);
+INSERT INTO `vaisseau` (`id`, `nom`, `description`, `capaciter`, `porter`, `nombreVoyages`) VALUES
+(1, 'Retaliator', 'un vaisseau de combat', 2, 1000000, 2),
+(2, 'Iteron MKV', 'un vaisseau de transport', 100, 500000, 2),
+(3, 'Ark', 'vaisseau de transport comercial', 1000, 1500000, 2),
+(4, 'Reliant Kore', 'petit vaisseau d\'exploration', 2, 1000000, 2),
+(5, 'Naglfar', 'vaisseau de combat ', 50, 1500000, 2);
 
 -- --------------------------------------------------------
 
@@ -108,7 +109,7 @@ ALTER TABLE `vaisseau`
 -- AUTO_INCREMENT pour la table `voyage`
 --
 ALTER TABLE `voyage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

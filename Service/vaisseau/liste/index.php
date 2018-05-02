@@ -14,6 +14,7 @@
           <description><?=utf8_encode($vaisseau['description'])?></description>
           <capaciter><?=utf8_encode($vaisseau['capaciter'])?></capaciter>
           <porter><?=$vaisseau['porter']?></porter>
+		  <nombreVoyages><?=$vaisseau['nombreVoyages']?></nombreVoyages>
       </vaisseau>
     <?php } ?>
   </vaisseaux>
