@@ -7,6 +7,8 @@ public class Voyage {
 	protected String description;
 	protected int distance;
 	protected int idVaisseau;
+
+	protected Vaisseau vaisseau;
 	
 	public Voyage(int id, String nom, String destination, String description, int distance, int idVaisseau){
 		this.id = id;
@@ -23,6 +25,14 @@ public class Voyage {
 		this.description = description;
 		this.distance = distance;
 		this.idVaisseau = idVaisseau;
+	}
+
+	public Vaisseau getVaisseau() {
+		return vaisseau;
+	}
+
+	public void setVaisseau(Vaisseau vaisseau) {
+		this.vaisseau = vaisseau;
 	}
 
 	public int getId() {
