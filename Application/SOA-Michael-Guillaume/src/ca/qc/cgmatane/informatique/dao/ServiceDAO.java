@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
-public class ServiceDAO implements VoyageURL, VaisseauURL{
+public class ServiceDAO implements VoyageURL, VaisseauURL, TypeParseur{
 
     protected HashMap<Integer, Vaisseau> listeVaisseaux;
     protected HashMap<Integer, Voyage> listeVoyages;
@@ -50,7 +50,7 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
             xml = this.recupererXML(URL_LISTER_VAISSEAUX, "</vaisseaux>");
 
             if(null == xml) return null;
-
+            BuilderVaisseau builderVaisseau = new BuilderVaisseau();
             try {
                 DocumentBuilder parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 Document document = parseur.parse(new StringBufferInputStream(xml));
@@ -59,22 +59,23 @@ public class ServiceDAO implements VoyageURL, VaisseauURL{
                 for(int iterateur = 0; iterateur < listeNoeudVaisseaux.getLength(); iterateur++){
                     Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(iterateur);
 
-                    int id = Integer.parseInt(noeudVaisseau.getElementsByTagName("id").item(0).getTextContent());
-                    String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
-                    String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
-                    int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
-                    int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
-                    int nombreVoyages = Integer.parseInt(noeudVaisseau.getElementsByTagName("nombreVoyages").item(0).getTextContent());
+                    
+                    
+                    //int id = Integer.parseInt(noeudVaisseau.getElementsByTagName("id").item(0).getTextContent());
+                   // String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
+                   // String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
+                   // int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
+                  //  int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
+                   // int nombreVoyages = Integer.parseInt(noeudVaisseau.getElementsByTagName("nombreVoyages").item(0).getTextContent());
 	               /*System.out.println("id = " + id);
 	               System.out.println("nom = " + nom);
 	               System.out.println("description = " + description);
 	               System.out.println("capaciter = " + capaciter);
 	               System.out.println("porter = " + porter);*/
 
-	               Vaisseau vaisseau = new Vaisseau(id, nom, description, capaciter, porter);
-	               vaisseau.setNombreVoyages(nombreVoyages);
-
-	               listeVaisseaux.put(id, vaisseau);
+	               Vaisseau vaisseau = builderVaisseau.SetParseur(XML).parse("Content-type: text/xml <?xml version='1.0' encoding='UTF-8'?>" + noeudVaisseau.getTextContent()).build();
+	               
+	               listeVaisseaux.put(vaisseau.getId(), vaisseau);
                 }
             } catch (ParserConfigurationException e) {
                 e.printStackTrace();

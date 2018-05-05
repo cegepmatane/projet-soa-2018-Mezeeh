@@ -19,7 +19,7 @@ public class BuilderVaisseau implements TypeParseur{
 	 protected int id, capaciter, porter, nombreVoyages;
 	 protected String nom, description;
 	 protected String typeParseur;
-	 
+	 public BuilderVaisseau(){}
 	 public BuilderVaisseau SetParseur(String type){
 		this.typeParseur = type;
 		return this;
