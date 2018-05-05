@@ -14,16 +14,23 @@ public class Vaisseau {
 
     protected List<Voyage> listeVoyages;
 
+    public Vaisseau(int id, String nom, String description, int capaciter, int porter, int nombreVoyage) {
+        this.id = id;
+        this.nom = nom;
+        this.description = description;
+        this.capaciter = capaciter;
+        this.porter = porter;
+        this.nombreVoyages = nombreVoyage;
+        this.listeVoyages = new ArrayList<Voyage>();
+    }
     public Vaisseau(int id, String nom, String description, int capaciter, int porter) {
         this.id = id;
         this.nom = nom;
         this.description = description;
         this.capaciter = capaciter;
         this.porter = porter;
-
         this.listeVoyages = new ArrayList<Voyage>();
     }
-
     public void ajouterVoyage(Voyage voyage){
         if(null != voyage && !listeVoyages.contains(voyage)){
             voyage.setVaisseau(this);
