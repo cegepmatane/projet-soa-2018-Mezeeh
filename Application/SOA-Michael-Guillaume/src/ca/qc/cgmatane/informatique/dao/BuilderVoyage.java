@@ -39,7 +39,7 @@ public class BuilderVoyage implements TypeParseur{
             this.idVaisseau = Integer.parseInt(noeudVoyage.getElementsByTagName("idvaisseau").item(0).getTextContent());
         }
         else
-            System.out.println("Format non supporté pour le moment");
+            System.out.println("Format non supporte pour le moment");
 
         return this;
     }

@@ -24,31 +24,14 @@ public class BuilderVaisseau implements TypeParseur{
 		this.typeParseur = type;
 		return this;
 	 }
-	 public BuilderVaisseau parse(String contenu){
+	 public BuilderVaisseau parse(Element noeudVaisseau){
 		if(typeParseur == null || typeParseur == XML){
-			DocumentBuilder parseur;
-			try {
-				parseur = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-				Document document = parseur.parse(new StringBufferInputStream(contenu));
-				
-				id = Integer.parseInt(document.getElementsByTagName("id").item(0).getTextContent());
-                nom = document.getElementsByTagName("nom").item(0).getTextContent();
-                description = document.getElementsByTagName("description").item(0).getTextContent();
-                capaciter = Integer.parseInt(document.getElementsByTagName("capaciter").item(0).getTextContent());
-                porter = Integer.parseInt(document.getElementsByTagName("porter").item(0).getTextContent());
-                nombreVoyages = Integer.parseInt(document.getElementsByTagName("nombreVoyages").item(0).getTextContent());
-                
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			id = Integer.parseInt(noeudVaisseau.getElementsByTagName("id").item(0).getTextContent());
+            nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
+            description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
+            capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
+            porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
+            nombreVoyages = Integer.parseInt(noeudVaisseau.getElementsByTagName("nombreVoyages").item(0).getTextContent());
 		}else{
 			//non implementer
 		}

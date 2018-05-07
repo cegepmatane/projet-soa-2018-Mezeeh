@@ -59,14 +59,14 @@ public class ServiceDAO implements VoyageURL, VaisseauURL, TypeParseur{
                 for(int iterateur = 0; iterateur < listeNoeudVaisseaux.getLength(); iterateur++){
                     Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(iterateur);
                     
-                    int id = Integer.parseInt(noeudVaisseau.getElementsByTagName("id").item(0).getTextContent());
+                    /*int id = Integer.parseInt(noeudVaisseau.getElementsByTagName("id").item(0).getTextContent());
                     String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
                     String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
                     int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
                     int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
                     int nombreVoyages = Integer.parseInt(noeudVaisseau.getElementsByTagName("nombreVoyages").item(0).getTextContent());
 
-                    /*System.out.println("id = " + id);
+                    System.out.println("id = " + id);
                     System.out.println("nom = " + nom);
                     System.out.println("description = " + description);
                     System.out.println("capaciter = " + capaciter);
@@ -74,9 +74,9 @@ public class ServiceDAO implements VoyageURL, VaisseauURL, TypeParseur{
 
 	               //Vaisseau vaisseau = builderVaisseau.SetParseur(XML).parse((Element) listeNoeudVaisseaux.item(iterateur)).build();
 
-                    Vaisseau vaisseau = new Vaisseau(id, nom, description, capaciter, porter, nombreVoyages);
+                    Vaisseau vaisseau = new BuilderVaisseau().SetParseur(XML).parse(noeudVaisseau).build();
 
-                    listeVaisseaux.put(id, vaisseau);
+                    listeVaisseaux.put(vaisseau.getId(), vaisseau);
                 }
             } catch (ParserConfigurationException e) {
                 e.printStackTrace();
@@ -155,12 +155,12 @@ public class ServiceDAO implements VoyageURL, VaisseauURL, TypeParseur{
                 NodeList listeNoeudVaisseaux = document.getElementsByTagName("vaisseau");
                 Element noeudVaisseau = (Element) listeNoeudVaisseaux.item(0);
 
-                String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
+                /*String nom = noeudVaisseau.getElementsByTagName("nom").item(0).getTextContent();
                 String description = noeudVaisseau.getElementsByTagName("description").item(0).getTextContent();
                 int capaciter = Integer.parseInt(noeudVaisseau.getElementsByTagName("capaciter").item(0).getTextContent());
-                int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());
+                int porter = Integer.parseInt(noeudVaisseau.getElementsByTagName("porter").item(0).getTextContent());*/
 
-                vaisseau = new Vaisseau(id, nom, description, capaciter, porter);
+                vaisseau = new BuilderVaisseau().SetParseur(XML).parse(noeudVaisseau).build();
 
             } catch (ParserConfigurationException e) {
                 e.printStackTrace();
